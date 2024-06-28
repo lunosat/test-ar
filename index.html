@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    </head>
+    <body style="margin: 0px; overflow: hidden;">
+        <a-scene embedded arjs>
+            <a-marker preset="hiro" id="marker">
+                <!-- Video component -->
+                <a-video 
+                    src="#video" 
+                    position="0 1 0" 
+                    width="1" 
+                    rotation="-90 0 0">
+                </a-video>
+                <video id="video" src="https://cdn.brid.tv/live/partners/17402/sd/969965.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline></video>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+        
+        <script>
+            document.querySelector("#marker").addEventListener("markerFound", (e) => {
+                let video = document.querySelector("#video");
+                video.play();
+            });
+
+            document.querySelector("#marker").addEventListener("markerLost", (e) => {
+                let video = document.querySelector("#video");
+                video.pause();
+            });
+        </script>
+    </body>
+</html>
